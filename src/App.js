@@ -1,25 +1,44 @@
-import logo from './logo.svg';
+import React, { Component} from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.state={
+      newItem:"",
+      list:[]
+   
+    }
+
+  }
+  updateInput(key,value){
+    this.setState({
+    [key]: value
+    })
+  }
+  addItem(){
+   const newItem={
+     id:1+Math.random(),
+    value : this.state.newItem.slice()
+   };
+  
+
+  const list=[...this.state.list];
+  list.push(newItem);
+  }
+  render(){
+  return( 
+      <div className="App">
+        <div>Add an Item.............</div>
+          <input type="text" value={this.state.newItem} placeholder="type item here....." onchange={e =>this.updateInput("newitem",e.target.value)}/>
+         <br/> <button onClick={() => this.addItem()} > Add </button>
+        </div>
+
+    
+    )
+  }
+
 }
 
 export default App;
